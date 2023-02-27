@@ -1,27 +1,51 @@
-// Crie uma array com os anos que o Brasil ganhou a copa
-// 1959, 1962, 1970, 1994, 2002
-var anosDaCopa = [1959, 1962, 1970, 1994, 2002];
+// Transforme o objeto abaixo em uma Constructor Function
+// const pessoa = {
+//   nome: 'Nome pessoa',
+//   idade: 0,
+//   andar() {
+//     console.log(this.nome + ' andou');
+//   }
+// }
 
-// Interaja com a array utilizando um loop, para mostrar
-// no console a seguinte mensagem, `O brasil ganhou a copa de ${ano}`
-
-for (var i = 0; i < anosDaCopa.length; i++) {
-  console.log(`O Brasil ganhou a copa de ${anosDaCopa[i]}`);
+function Pessoa(nome, idade) {
+  this.nome = nome;
+  this.idade = idade + " anos";
+  this.andar = function () {
+    console.log(this.nome + " andou");
+  };
 }
 
-// Interaja com um loop nas frutas abaixo e pare ao chegar em Pera
-var frutas = ["Banana", "Maçã", "Pera", "Uva", "Melância"];
+// Crie 3 pessoas, João - 20 anos,
+// Maria - 25 anos, Bruno - 15 anos
 
-for (var fruta = 0; fruta < frutas.length; fruta++) {
-  console.log(frutas[fruta]);
-  if (frutas[fruta] === "Pera") {
-    break;
-  }
+const joao = new Pessoa("João", 20);
+const maria = new Pessoa("Maria", 25);
+const bruno = new Pessoa("Bruno", 15);
+
+// Crie uma Constructor Function (Dom) para manipulação
+// de listas de elementos do dom. Deve conter as seguintes
+// propriedades e métodos:
+//
+// elements, retorna NodeList com os elementos selecionados
+// addClass(classe), adiciona a classe a todos os elementos
+// removeClass(classe), remove a classe a todos os elementos
+
+function Dom(selector) {
+  const elementList = document.querySelectorAll(selector);
+  this.elements = elementList;
+  this.addClass = function (classe) {
+    elementList.forEach((element) => {
+      element.classList.add(classe);
+    });
+  };
+  this.removeClass = function (classe) {
+    elementList.forEach((element) => {
+      element.classList.remove(classe);
+    });
+  };
 }
+const listaItens = new Dom("li");
+const ul = new Dom("ul");
 
-// Coloque a última fruta da array acima em uma variável,
-// sem remover a mesma da array.
-var ultimaFruta = frutas[frutas.length - 1];
-
-console.log(ultimaFruta);
-console.log(frutas);
+listaItens.addClass("ativar");
+ul.addClass("ativar-ul");
