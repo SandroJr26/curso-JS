@@ -3,20 +3,30 @@
 //   element() {
 //     return document.querySelector(this.selector);
 //   },
-//   ativar() {
-//     this.element().classList.add("ativar");
+//   ativo() {
+//     this.element().classList.add("ativo");
 //   },
 // };
 
-function Dom(selector) {
+// Dom.ativo();
+
+// Dom.selector = "ul";
+// Dom.ativo();
+
+function Dom(seletor) {
   this.element = function () {
-    return document.querySelector(selector);
+    return document.querySelector(seletor);
   };
   this.ativar = function () {
     this.element().classList.add("ativar");
   };
 }
 
-const li = new Dom("li");
 const ul = new Dom("ul");
-const lastLi = new Dom("li:last-child");
+ul.ativar();
+
+const li = new Dom("li");
+li.ativar();
+
+const liLastChild = new Dom("li:last-child");
+liLastChild.ativar();
