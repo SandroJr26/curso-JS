@@ -1,18 +1,25 @@
 // Transforme o objeto abaixo em uma Constructor Function
+// const pessoa = {
+//   nome: 'Nome pessoa',
+//   idade: 0,
+//   andar() {
+//     console.log(this.nome + ' andou');
+//   }
+// }
+
 function Pessoa(nome, idade) {
-  this.nome = nome;
-  this.idade = idade;
-  this.andar = function () {
-    return `${nome} andou`;
-  };
+  (this.nome = nome),
+    (this.idade = idade),
+    (this.andou = function () {
+      console.log(this.nome + " andou");
+    });
 }
 
 // Crie 3 pessoas, João - 20 anos,
 // Maria - 25 anos, Bruno - 15 anos
-
-const joao = new Pessoa("João", 20);
-const maria = new Pessoa("Maria", 25);
-const bruno = new Pessoa("Bruno", 15);
+const joao = new Pessoa("Jõao", "20");
+const maria = new Pessoa("Maria", "30");
+const bruno = new Pessoa("Bruno", "15");
 
 // Crie uma Constructor Function (Dom) para manipulação
 // de listas de elementos do dom. Deve conter as seguintes
@@ -22,26 +29,22 @@ const bruno = new Pessoa("Bruno", 15);
 // addClass(classe), adiciona a classe a todos os elementos
 // removeClass(classe), remove a classe a todos os elementos
 
-function Dom(seletor) {
-  const elementList = document.querySelectorAll(seletor);
-  this.elements = elementList;
-  this.addClass = function () {
+function Dom(select) {
+  const elementList = document.querySelectorAll(select);
+  this.elementList = elementList;
+  this.addClass = (classe) => {
     elementList.forEach((element) => {
-      element.classList.add("ativo");
+      element.classList.add(classe);
     });
-    this.removeClass = function () {
-      elementList.forEach((element) => {
-        element.classList.remove("ativo");
-      });
-    };
+  };
+  this.removeClass = (classe) => {
+    elementList.forEach((element) => {
+      element.classList.remove(classe);
+    });
   };
 }
+const li = new Dom("li");
 
-const listaItens = new Dom("li");
-const ul = new Dom("ul");
+li.addClass("desativado");
 
-listaItens.addClass();
-listaItens.removeClass();
-
-ul.addClass();
-ul.removeClass();
+li.removeClass("ativado");
