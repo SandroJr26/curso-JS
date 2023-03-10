@@ -1,58 +1,116 @@
-// // const instruments = ["Guitarra", "Baixo", "Violão"];
-// const price = [49, 99, 69, 89];
+// Metodos que modificam a array
+const intrumentos = [
+  "Guitarra",
+  "Violão",
+  "Cavaquinho",
+  "Bateria",
+  "Baixo",
+  "Flauta",
+];
 
-// const dados = [
-//   new String("Tipo 1"),
-//   ["Carro", "Portas", { cor: "Azul", preco: 2000 }],
-//   function andar(nome) {
-//     console.log(nome);
-//   },
-// ];
+intrumentos.pop();
+intrumentos.shift();
+intrumentos.push("Guitarra");
 
-// dados[2]("Sandro Júnior");
-// dados[1][2].cor += " Vermelho";
-// dados[1][2].cor;
+const dados = [
+  new String("Tipo 1"),
+  ["Carro", "Portas", { cor: "Azul", preco: 2000 }],
+  function andar(nome) {
+    console.log(nome);
+  },
+];
 
-// const carros = new Array("Ford", "Mustang", "Chevrolet", "Gol", "Fiesta");
+dados[2]("Sandro Jr");
 
-// carros[0];
-// // console.log(...carros);
-// carros[0], carros[1], carros[2], carros[3], carros[4];
+const carros = new Array("Mustang", "Ferrari", "Saveiro", "Gol", "Parati");
 
-// const li = document.querySelectorAll("li");
-// const liArray = Array.from(li);
+carros.length;
 
-// const obj = {
-//   0: "Sandro",
-//   1: "Junior",
-//   2: "Teste",
-//   length: 3, // Para o objeto se transformar em array, precisa do "length"
-// };
+if (carros[4] === "Parati") {
+  carros.pop();
+}
 
-// const objArray = Array.from(obj);
+carros.length;
 
-// Array.isArray(li);
-// Array.isArray(liArray);
+const li = document.querySelectorAll("li");
+const liArray = Array.from(li);
 
-// Array.of(10, 20, 30, 40, 50);
-// Array.of("Teste", "Teste 2");
-// Array(10);
+const obj = {
+  0: "Sandro",
+  1: "Junior",
+  2: "Teste",
+  length: 4,
+};
 
-// const frutas = ["Banana", "Maça", ["Abacate", "Melão"], "Pera"];
+obj[3] = "HAHA";
+const objArray = Array.from(obj);
 
-// frutas[0].length;
-// frutas[2][1].length;
+Array.of(10);
+Array(10);
 
-// const instruments = ["Guitarra", "Baixo", "Violão"];
-// const idade = [16, 32, 52, 16, 27, 28];
+const frutas = ["Banana", "Maça", "Pera", ["Uva roxa", "Uva Verde"]];
 
-// instruments.sort(); // Coloca em ordem alfabetica
-// idade.sort(); //  caracter por caracter do menor ao maior 11 23 8
+frutas[3][1]; // Uva roxa
 
-const carros = ["Ford", "Fiat", "VW"];
-carros.unshift("Kia", "Ferrari"); //adiciona ao inicio
-carros.push("Palio", "Gol"); //adiciona ao final
-carros.pop(); // Retira o ultimo item
-carros.shift(); // Retira o 1 item
-carros.reverse(); // Inverte a ordem
+frutas.sort(); // ordem alfabetica
+frutas.unshift("Melancia"); // adiciona ao inicio
+frutas.push("Morango", "Tomate"); // adiciona ao final
+frutas.pop(); // retira o ultimo item da array
+frutas.shift(); // retira o 1° item
+frutas.reverse(); // inverte a ordem da array
 
+const carros2 = ["Ford", "Maverik", "Impala", "Gol", "Opala"];
+
+carros2.splice(4, 0, "D20", "Mustang"); // .splice(a partir, remove, itens add)
+carros2.splice(0, 1, "S10", "Jaguá");
+
+carros2;
+
+const itens = [
+  "Item1",
+  "Item2",
+  "Item3",
+  "Item 4",
+  "Item5",
+  "Item6",
+  "Item7",
+  "Item8",
+];
+
+itens;
+itens.copyWithin(2, 0, 6); // .copyWithin(a partir, remove, passa novamente X itens da array)
+
+itens.fill("Mandioca", 6, 7); // .fill(add ' ' na array, a partir, para de add)
+
+itens.push(carros2);
+
+itens[8][3]; // Impala
+
+// Metodos que não modificam a array
+const transport1 = ["Barco", "Avião"];
+const transport2 = ["Carro", "Moto"];
+const transport3 = [].concat(transport1, transport2, "Bicicleta");
+const transport = transport1.concat(transport2);
+
+let linguagens = ["html", "csS", "js", "pHp", "phytOn"];
+
+linguagens.includes("css"); // true
+linguagens.includes("ruby"); // false retorna booleano
+linguagens.indexOf("phyton"); // 4
+linguagens.indexOf("laraval"); // retorna -1 em item que não existe
+linguagens.indexOf("js"); // 2 retorna o primeiro index
+linguagens.lastIndexOf("js"); // retorna o index do ultimo
+
+linguagens.join(); // juntar todo array (' ')
+linguagens.join(" | "); // 'html | css | js | php | phyton | js'
+
+linguagens.join(" | ").toUpperCase(); // 'HTML | CSS | JS | PHP | PHYTON | JS'
+
+let htmlString = "<h2>Título principal</h2>";
+htmlString = htmlString.split("h2"); // remove o h2
+htmlString = htmlString.join("h1"); // add o h1
+
+linguagens.slice(2); // ['js', 'pHp', 'phytOn'] // retorna a array a partir do index ,  até o index
+linguagens.slice(1, 3); // ['csS']
+
+const cloneLinguagens = linguagens.slice(); // .slice() usado para clone
