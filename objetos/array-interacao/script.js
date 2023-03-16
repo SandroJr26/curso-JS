@@ -1,86 +1,64 @@
-// Método forEach é uma função que percorre todos os itens da array
-// e retorna undefined
+// Selecione cada curso e retorne uma array
+// com objetos contendo o título, descricao,
+// aulas e horas de cada curso
+const courses = document.querySelectorAll(".curso");
+const arrayCouses = Array.from(courses);
 
-// const carros = ["Ford", "Fiat", "Honda"];
-// carros.forEach(function (carro, index, array) {
-//   return carro.toUpperCase();
-// });
+const objectCouses = arrayCouses.map((course) => {
+  const title = course.querySelector("h1").innerText;
+  const description = course.querySelector("p").innerText;
+  const classes = course.querySelector(".aulas").innerText;
+  const hour = course.querySelector(".horas").innerText;
+  return {
+    title,
+    description,
+    classes,
+    hour,
+  };
+});
 
-// carros.forEach((carro) => {
-//   return carro.toUpperCase();
-// });
+// Retorne uma lista com os
+// números maiores que 100
+const numeros = [3, 44, 333, 23, 122, 322, 33];
+const numberGreat100 = numeros.filter((number) => {
+  return number > 100;
+});
 
-// const li = document.querySelectorAll("ul li");
-// const liArray = Array.from(li);
+// Verifique se Baixo faz parte
+// da lista de instrumentos e retorne true
+const instrumentos = ["Guitarra", "Baixo", "Bateria", "Teclado"];
+const includeBaixo = instrumentos.some((instrumento) => {
+  return instrumento === "Baixo";
+});
+console.log(includeBaixo);
 
-// function activeLi() {
-//   liArray.forEach((li) => {
-//     li.classList.remove("active");
-//   });
-//   this.classList.toggle("active");
-// }
+// Retorne o valor total das compras
+const compras = [
+  {
+    item: "Banana",
+    preco: "R$ 4,99",
+  },
+  {
+    item: "Ovo",
+    preco: "R$ 2,99",
+  },
+  {
+    item: "Carne",
+    preco: "R$ 25,49",
+  },
+  {
+    item: "Refrigerante",
+    preco: "R$ 5,35",
+  },
+  {
+    item: "Quejo",
+    preco: "R$ 10,60",
+  },
+];
 
-// liArray.forEach((li) => {
-//   li.addEventListener("click", activeLi);
-// });
-
-// const retornoForEach = liArray.forEach((li) => {
-//   li.addEventListener("click", activeLi);
-// });
-// console.log(retornoForEach);
-
-// Map faz exatamente o mesmo que o forEach, pórem ele tem um retono com a variavel atualizada
-
-// const carros = ["Ford", "Fiat", "Honda"];
-
-// const retornoMap = carros.map((carro) => {
-//   return carro.concat(li);
-// });
-
-// const numeros = [23, 123, 152, 235];
-// const numerosMap = numeros.map((n) => n * 2);
-
-// console.log(numerosMap);
-
-// const classes = [
-//   {
-//     nome: "HTML 1",
-//     min: 15,
-//   },
-//   {
-//     nome: "HTML 2",
-//     min: 10,
-//   },
-//   {
-//     nome: "CSS 1",
-//     min: 20,
-//   },
-//   {
-//     nome: "JS 1",
-//     min: 25,
-//   },
-// ];
-
-// const timeClasses = classes.map((item) => item.min);
-
-// const nameClasses = (item) => item.nome;
-// const nameClasses2 = function nameClasses2(item) {
-//   return item.nome;
-// };
-
-// const arrayNameClass = classes.map(nameClasses2);
-
-// .reduce(callback(acumulador, valorAtual, index, array),
-// Possui o valor (acumulador), é o retorno da iteração anterior
-
-const classes = [10, 25, 30];
-
-const reduceClasses = classes.reduce((acumulador, item, index, array) => {
-  return acumulador + item;
-}, 0); // ({}, 0) valor inicial passado para o acumulador
-
-const numbers = [10, 25, 60, 5, 35, 10];
-
-const highestValue = numbers.reduce((previousValue, currentValue) => {
-  return previousValue > currentValue ? previousValue : currentValue;
+const allPrice = compras.reduce((acumulator, item) => {
+  const priceFormated = +item.preco.replace("R$", "").replace(",", ".");
+  return acumulator + priceFormated;
 }, 0);
+
+console.log(allPrice);
