@@ -1,63 +1,86 @@
-// function perimetro(lado) {
-//   return lado * 4;
-// }
+// Básico de Função
+const perimetro = Function("lado", "return lado * 4"); // NUNCA criar uma função dessa maneira.
 
-// const perimetro2 = new Function("lado", "return lado * 4");
+function areaQuadrado(lado) {
+  return lado * 4;
+}
 
-// function somar(n1, n2, n3, n4) {
-//   return n1 + n2;
-// }
+function somar(n1, n2) {
+  return n1 + n2;
+}
 
-// // somar() retorna um nmr
-// // somar retorna a função
-// somar.length;
+somar(3, 4); // retorna 1 numero
+somar; // retorna a função
+somar.length; // 2 retorna o total de argumentos da funcão
+somar.name; // retorna o nome da função como String
 
-// function darOi(nome) {
-//   console.log("Oi, tudo bom? " + nome);
-// }
+// call(this, arg1, arg2, ...) executa a função, sendo possível passarmos uma nova referência ao this da mesma.
 
-// // darOi("Sandro");
-// // darOi.call(null, "Sandro");
+function hello(name, age) {
+  return "Hello for you! " + name + age;
+}
 
-// function descriptionCar(velocidade) {
-//   console.log(this);
-//   console.log(this.marca + " " + this.ano + " " + velocidade);
-// }
+hello.call({}, "Sandro ", 26);
 
-// // descriptionCar.call({ marca: "Honda", ano: 2022 }, 100);
+window.brand = "Volkswagen"; // Maneira errada de atribuir o this
+window.age = 2010;
 
-// const cars = ["Honda", "Gol", "Voyagem"];
-// const frutas = ["Banana", "Uva", "Pêra"];
+function descriptionCar(velocidade) {
+  return this.brand + " " + this.age + " " + velocidade;
+}
 
-// cars.forEach.call(frutas, (item) => {
-//   // console.log(item);
-// });
+// Maneira certa de atribuir o this
+const car = {
+  brand: "Ford",
+  age: 2023,
+};
 
-// function Dom(selector) {
-//   this.element = document.querySelector(selector);
-// }
+descriptionCar.call(car, 120); // 2 maneiras de chegar ao mesmo resultado
+descriptionCar.call({ brand: "Chevrolet", age: 1956 }, 100);
 
-// Dom.prototype.ativo = function (classe) {
-//   console.log(this);
-//   this.element.classList.toggle(classe);
-// };
+const cars1 = ["Ford", "Fiat", "VW"];
+const cars2 = ["Ferrari", "Renault", "Toyota"];
 
-// const li = {
-//   element: document.querySelector("li"),
-// };
+cars1.forEach((car) => {
+  // console.log(car.toUpperCase());
+});
 
-// Dom.prototype.ativo.call(li, "ativo");
+cars1.forEach.call(cars2, (car) => {
+  // console.log(car.toUpperCase());
+});
 
-// const ul = new Dom("ul");
+// Uso de código de fácil leitura e manuntenção usada pelo mercado
+function Dom(selector) {
+  this.element = document.querySelectorAll(selector);
+}
 
-// ul.ativo("ativo");
-// ul.ativo.call(li, "ativar");
+Dom.prototype.ativo = function (classe) {
+  this.element.forEach((item) => {
+    item.classList.add(classe);
+  });
+};
 
-const frutas = ["Banana", "Uva", "Pêra"];
+const ul = new Dom("ul");
+const li1 = {
+  element: document.querySelectorAll("li"),
+};
+ul.ativo("ativo");
 
-Array.prototype.pop.call(frutas);
-frutas.pop(); // exatamente a mesma coisa
+// call substitui o elemento anterior que é parecido com o original
+// uso viável
+Dom.prototype.ativo.call(li1, "ativo");
 
+// uso inviável
+// ul.ativo.call(li, "ativo");
+
+const fruits = ["Uva", "Maça", "Pêra"];
+
+Array.prototype.pop.call(fruits);
+fruits.pop(fruits); // Exatamente o mesmo código
+
+// Array.prototype.metotos serão utilizados com um objeto que se pareçam com um Array
+
+// Object parecido com uma array
 const arrayLike = {
   0: "Item 1",
   1: "Item 2",
@@ -65,11 +88,17 @@ const arrayLike = {
   length: 3,
 };
 
-const li = document.querySelectorAll("li");
-const arrayLi = Array.from(li);
+const li2 = document.querySelectorAll("li");
+const arrayLi = Array.from(li2);
 
-const filter = Array.prototype.filter.call(li, (item) => {
-  return item.classList.contains("ativo");
+const filter = Array.prototype.filter.call(li2, function (item) {
+  return item.classList.contains("ativado");
 });
 
-console.log(filter);
+const filter2 = arrayLi.filter((item) => {
+  return item.classList.contains("ativado");
+});
+
+// apply
+
+// bind
