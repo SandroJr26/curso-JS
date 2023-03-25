@@ -22,7 +22,6 @@ function createElement(tag, classe, content) {
 }
 createElement("ul", "teste", "Esse é o conteudo");
 
-  return item.classList.contains("ativado");
 // Crie uma nova função utilizando a anterior como base
 // essa nova função deverá sempre criar h1 com a
 // classe titulo. Porém o parâmetro conteudo continuará dinâmico
