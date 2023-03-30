@@ -1,141 +1,129 @@
-// Básico de Função
-const perimetro = Function("lado", "return lado * 4"); // NUNCA criar uma função dessa maneira.
-
-function areaQuadrado(lado) {
+function squareArea(lado) {
   return lado * 4;
 }
 
-function somar(n1, n2) {
-  return n1 + n2;
+const squarePerimeter = new Function("lado", "return lado * 4");
+
+function sum(n1, n2) {
+  return n1 + n2 + "Teste";
 }
 
-somar(3, 4); // retorna 1 numero
-somar; // retorna a função
-somar.length; // 2 retorna o total de argumentos da funcão
-somar.name; // retorna o nome da função como String
+sum(2, 4).charAt(2); // e
+sum.length; // 2 - total de argumentos
+sum.name.toUpperCase(); // SUM
 
-// call(this, arg1, arg2, ...) executa a função, sendo possível passarmos uma nova referência ao this da mesma.
+// CALL executa a função, sendo possível passarmos uma nova referência ao this da mesma.
+// call(null, 'bla bla bla') null quando não houver troca
 
-function hello(name, age) {
-  return "Hello for you! " + name + age;
+function hello(name) {
+  console.log("Hello " + name);
 }
 
-hello.call({}, "Sandro ", 26);
+// hello("Sandro");
+// hello.call(null, "Rafael");
 
-window.brand = "Volkswagen"; // Maneira errada de atribuir o this
-window.age = 2010;
+// errado se fazer, somente demonstração
+// window.marca = "Volkswagem";
+// window.age = 2021;
 
-function descriptionCar(velocidade) {
-  return this.brand + " " + this.age + " " + velocidade;
+function descriptionCar(speed) {
+  console.log(this.marca + " " + this.age + " " + speed);
 }
 
-// Maneira certa de atribuir o this
-const car = {
-  brand: "Ford",
-  age: 2023,
-};
+// descriptionCar.call({ marca: "Honda", age: 2020 }, 100);
 
-descriptionCar.call(car, 120); // 2 maneiras de chegar ao mesmo resultado
-descriptionCar.call({ brand: "Chevrolet", age: 1956 }, 100);
+const cars1 = ["Ford", "Fiat", "Vw"];
+const cars2 = ["Maverik", "Gol", "Impala"];
 
-const cars1 = ["Ford", "Fiat", "VW"];
-const cars2 = ["Ferrari", "Renault", "Toyota"];
-
-cars1.forEach((car) => {
-  // console.log(car.toUpperCase());
+// metodo call substitiu
+cars1.forEach.call(cars2, (item) => {
+  // console.log(item);
 });
 
-cars1.forEach.call(cars2, (car) => {
-  // console.log(car.toUpperCase());
-});
-
-// Uso de código de fácil leitura e manuntenção usada pelo mercado
 function Dom(selector) {
   this.element = document.querySelectorAll(selector);
 }
 
+const ul = new Dom("ul");
+// const li = new Dom("li");
+const li = {
+  element: document.querySelectorAll("li"),
+};
+
 Dom.prototype.ativo = function (classe) {
   this.element.forEach((item) => {
-    item.classList.add(classe);
+    item.classList.toggle(classe);
   });
 };
 
-const ul = new Dom("ul");
-const li1 = {
-  element: document.querySelectorAll("li"),
-};
-ul.ativo("ativo");
-
-// call substitui o elemento anterior que é parecido com o original
-// uso viável
-Dom.prototype.ativo.call(li1, "ativo");
-
-// uso inviável
+// ul.ativo("ativo");
 // ul.ativo.call(li, "ativo");
 
-const fruits = ["Uva", "Maça", "Pêra"];
+// chamar a função direto do prototipo
+Dom.prototype.ativo.call(ul, "ativo");
+
+const fruits = ["Banana", "Maça", "Pêra"];
 
 Array.prototype.pop.call(fruits);
-fruits.pop(fruits); // Exatamente o mesmo código
+fruits.pop();
 
-// Array.prototype.metotos serão utilizados com um objeto que se pareçam com um Array
+// const li = document.querySelectorAll("li");
+const arrayLi = Array.from(li);
 
-// Object parecido com uma array
 const arrayLike = {
   0: "Item 1",
   1: "Item 2",
   2: "Item 3",
-  length: 3,
+  3: "Item 4",
+  4: "Item 5",
+  length: 5,
 };
 
-const li2 = document.querySelectorAll("li");
-const arrayLi = Array.from(li2);
+// const filter1 = Array.prototype.filter.call(li, (item) => {
+//   return item.classList.contains("ativo");
+// });
 
-const filter = Array.prototype.filter.call(li2, function (item) {
-  return item.classList.contains("ativado");
-});
+// const filter2 = arrayLi.filter((item) => {
+//   return item.classList.contains("ativo");
+// });
 
-const filter2 = arrayLi.filter((item) => {
-  return item.classList.contains("ativado");
-});
+// Apply a diferença entre o call é que os argumentos da função são passadas através de uma array
 
-// O apply(this, [arg1, arg2, ...]) funciona como o call, a única diferença é que os argumentos da função são passados através de uma array
-const numbers = [26, 13, 532, 144, 646, 234, 623, 5234, 2676, 47984];
-Math.max.call(null, numbers);
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+Math.max.call(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 Math.max.apply(null, numbers);
 
-// bind é usado caso precisar re-usar, se não precisar re-usar use o call ou apply
-
-const li = document.querySelectorAll("li");
-const filterLi = Array.prototype.filter.bind(li, function (item) {
-  return item.classList.contains("ativado");
+// Bind não irá retornar a função mas sim retornar a função com o novo contexto de this
+const filter1 = Array.prototype.filter.bind(li, (item) => {
+  return item.classList.contains("ativo");
 });
 
 const $ = document.querySelectorAll.bind(document);
 
-$("ul");
+$("li");
 
-const car3 = {
+const car = {
   marca: "Ford",
-  age: 2022,
-  acelerar: function (aceleracao, tempo) {
-    return `${this.marca} acelerou ${aceleracao}Km em ${tempo} minutos`;
+  age: 2020,
+  speedUp: function (acceleration, time) {
+    return `${this.marca} acelerou ${acceleration}Km em ${time} minutos!`;
   },
 };
-car3.acelerar(120, 40);
 
 const honda = {
   marca: "Honda",
 };
 
-const acelerarHonda = car3.acelerar.bind(honda);
-acelerarHonda(140, 30);
+const accelerationHonda = car.speedUp.bind(honda);
+
+car.speedUp(140, 30);
+accelerationHonda(150, 40);
 
 function imc(altura, peso) {
   return peso / (altura * altura);
 }
-imc(1.83, 80);
-
 const imc183 = imc.bind(null, 1.83);
 
-imc183(80);
+imc(1.83, 79);
+imc183(79);
