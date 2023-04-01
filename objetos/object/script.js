@@ -1,10 +1,9 @@
 // Crie uma função que verifique
 // corretamente o tipo de dado
-function checkData(data) {
-  return Object.prototype.toString.call(data);
+function checkData(dado) {
+  return Object.prototype.toString.call(dado);
 }
-
-checkData([]);
+Object.prototype.toString.call([]); // object Array
 
 // Crie um objeto quadrado com
 // a propriedade lados e torne
@@ -17,8 +16,6 @@ Object.defineProperties(square, {
   },
 });
 
-square.lados = 10;
-
 // Previna qualquer mudança
 // no objeto abaixo
 const configuracao = {
@@ -27,13 +24,12 @@ const configuracao = {
   background: "#333",
 };
 
-Object.freeze(configuracao);
-
 configuracao.width = 1000;
+Object.freeze(configuracao);
+configuracao.width = 2000;
 
 // Liste o nome de todas
 // as propriedades do
 // protótipo de String e Array
-
-Object.getOwnPropertyNames(String.prototype);
 Object.getOwnPropertyNames(Array.prototype);
+Object.getOwnPropertyNames(String.prototype);
