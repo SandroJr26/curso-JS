@@ -4,23 +4,19 @@ export default function initModal() {
   const containerModal = document.querySelector('[data-modal="container"]');
 
   if (botaoAbrir && botaoFechar && containerModal) {
-    function abrirModal(event) {
+    function toggle(event) {
       event.preventDefault();
-      containerModal.classList.add("ativo");
-    }
-    function fecharModal(event) {
-      event.preventDefault();
-      containerModal.classList.remove("ativo");
+      containerModal.classList.toggle("ativo");
     }
 
     function clickForaModal(event) {
       if (event.target === this) {
-        fecharModal(event);
+        toggle(event);
       }
     }
 
-    botaoAbrir.addEventListener("click", abrirModal);
-    botaoFechar.addEventListener("click", fecharModal);
+    botaoAbrir.addEventListener("click", toggle);
+    botaoFechar.addEventListener("click", toggle);
     containerModal.addEventListener("click", clickForaModal);
   }
 }
