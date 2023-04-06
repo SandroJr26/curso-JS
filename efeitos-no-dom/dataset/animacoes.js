@@ -8,7 +8,7 @@ function initTabNav() {
       tabContent.forEach((section) => {
         section.classList.remove("ativo");
       });
-      const direcao = tabContent[index].dataset.anima;
+      const direcao = tabContent[index].dataset.anime;
       tabContent[index].classList.add("ativo", direcao);
     }
 
